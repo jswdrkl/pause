@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="mr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ठेहराव</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: IBM Plex Sans & IBM Plex Sans Devanagari -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"IBM Plex Sans Devanagari"', '"IBM Plex Sans"', 'sans-serif'],
+          },
+          colors: {
+            paper: {
+              50: '#FBF9F5',
+              100: '#F5F1EA',
+              200: '#E8E1D3',
+              800: '#2C2B29',
+              900: '#1A1918',
+              950: '#121110',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Strict font and word wrapping configuration */
+    body {
+      font-family: 'IBM Plex Sans Devanagari', 'IBM Plex Sans', sans-serif;
+      word-break: normal;
+      overflow-wrap: break-word;
+      hyphens: none;
+      -webkit-hyphens: none;
+      -ms-hyphens: none;
+    }
+
+    .essay-content {
+      text-align: justify;
+      text-justify: inter-word;
+      word-break: normal;
+      overflow-wrap: break-word;
+      hyphens: none;
+    }
+
+    /* Subtle backdrop transitions */
+    .theme-transition {
+      transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                  color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                  border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+
+<body class="theme-transition bg-[#FBF9F5] text-[#2C2B29] dark:bg-[#121110] dark:text-[#E8E1D3] min-h-screen antialiased selection:bg-amber-200 dark:selection:bg-amber-900/60 selection:text-amber-950 dark:selection:text-amber-100">
+
+  <div class="sticky top-4 sm:top-6 z-50 flex justify-end max-w-3xl mx-auto px-5 sm:px-6 pointer-events-none">
+    <div class="pointer-events-auto inline-flex items-center gap-1.5 p-1.5 rounded-full backdrop-blur-md bg-white/80 dark:bg-[#1E1C1A]/80 border border-stone-200/80 dark:border-stone-800/80 shadow-sm hover:shadow-md transition-all">
+      <!-- Share Button -->
+      <button 
+        id="shareBtn" 
+        type="button" 
+        aria-label="Share" 
+        class="flex items-center justify-center w-9 h-9 rounded-full text-stone-700 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors focus:outline-none"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+        </svg>
+      </button>
+
+      <!-- Theme Toggle Button -->
+      <button 
+        id="themeToggleBtn" 
+        type="button" 
+        aria-label="Toggle Theme" 
+        class="flex items-center justify-center w-9 h-9 rounded-full text-stone-700 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors focus:outline-none"
+      >
+        <!-- Sun Icon (shown in dark mode) -->
+        <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+        </svg>
+        <!-- Moon Icon (shown in light mode) -->
+        <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 block dark:hidden text-stone-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification for Share / Copy fallback -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-4 py-2 text-sm font-medium rounded-full bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 shadow-lg opacity-0 pointer-events-none transition-opacity duration-300">
+    Link copied to clipboard
+  </div>
+
+  <main class="max-w-3xl mx-auto px-5 sm:px-8 pt-4 pb-20 sm:pb-28">
+    <!-- Essay Title -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-8 sm:mb-12 text-center">
+      ठेहराव
+    </h1>
+
+    <div class="mb-10 sm:mb-14 overflow-hidden rounded-2xl shadow-sm border border-stone-200/60 dark:border-stone-800/60 bg-gradient-to-b from-amber-50/50 to-orange-50/30 dark:from-stone-900/40 dark:to-stone-900/10 p-2 sm:p-4">
+      <svg class="w-full h-auto max-h-[340px] rounded-xl" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ठेहराव - संगीत, शांतता आणि विसावा यांचे प्रतीकात्मक चित्रण">
+        <defs>
+          <!-- Background Gradients -->
+          <linearGradient id="skyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#312E81" />
+            <stop offset="40%" stop-color="#4338CA" />
+            <stop offset="70%" stop-color="#BE185D" />
+            <stop offset="100%" stop-color="#F59E0B" />
+          </linearGradient>
+
+          <linearGradient id="tanpuraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F59E0B" />
+            <stop offset="50%" stop-color="#EA580C" />
+            <stop offset="100%" stop-color="#9A3412" />
+          </linearGradient>
+
+          <linearGradient id="pauseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FDE68A" />
+            <stop offset="50%" stop-color="#F59E0B" />
+            <stop offset="100%" stop-color="#D97706" />
+          </linearGradient>
+
+          <linearGradient id="windowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="#818CF8" stop-opacity="0.85" />
+          </linearGradient>
+
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="8" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        <!-- Dynamic Scenic Backdrop -->
+        <rect width="800" height="450" rx="16" fill="url(#skyGrad)" />
+
+        <!-- Calming Aura Waves & Breathing concentric ripples -->
+        <circle cx="400" cy="225" r="210" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2" stroke-dasharray="6 6" />
+        <circle cx="400" cy="225" r="170" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="2" />
+        <circle cx="400" cy="225" r="130" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2.5" />
+        <circle cx="400" cy="225" r="90" stroke="#FFFFFF" stroke-opacity="0.32" stroke-width="3" />
+
+        <!-- Vintage Windows Frame / Perspective portal motif -->
+        <g opacity="0.45" transform="translate(140, 70)">
+          <rect x="0" y="0" width="520" height="310" rx="20" fill="none" stroke="#FFFFFF" stroke-width="2" />
+          <line x1="260" y1="0" x2="260" y2="310" stroke="#FFFFFF" stroke-width="2" />
+          <line x1="0" y1="155" x2="520" y2="155" stroke="#FFFFFF" stroke-width="2" />
+        </g>
+
+        <!-- Acoustic waves / Sitar & Tanpura Strings spanning horizontally -->
+        <g stroke="#FDE68A" opacity="0.65" stroke-width="1.5">
+          <path d="M 50 170 C 220 120, 320 220, 500 170 S 680 120, 750 170" fill="none" />
+          <path d="M 50 200 C 220 150, 320 250, 500 200 S 680 150, 750 200" fill="none" />
+          <path d="M 50 230 C 220 180, 320 280, 500 230 S 680 180, 750 230" fill="none" />
+          <path d="M 50 260 C 220 210, 320 310, 500 260 S 680 210, 750 260" fill="none" />
+        </g>
+
+        <!-- Stylized Tanpura Gourd / Resonator base silhouette on left -->
+        <path d="M 90 380 C 130 380, 210 330, 210 240 C 210 180, 160 140, 130 140 C 120 140, 110 160, 110 180 C 80 240, 60 380, 90 380 Z" fill="url(#tanpuraGrad)" opacity="0.85" />
+        <circle cx="160" cy="250" r="18" fill="#451A03" opacity="0.6" />
+
+        <!-- The Sacred Pause Motif (||) glowing at the center of the symphony -->
+        <g filter="url(#glow)">
+          <rect x="365" y="160" width="26" height="130" rx="13" fill="url(#pauseGrad)" />
+          <rect x="409" y="160" width="26" height="130" rx="13" fill="url(#pauseGrad)" />
+        </g>
+
+        <!-- Floating Swaras & Musical notes -->
+        <!-- Note 1 -->
+        <g transform="translate(240, 115) scale(0.9)" fill="#FEF08A">
+          <ellipse cx="14" cy="24" rx="8" ry="6" transform="rotate(-20 14 24)" />
+          <rect x="20" y="4" width="3" height="20" />
+          <path d="M 23 6 Q 34 10 34 18" stroke="#FEF08A" stroke-width="2.5" fill="none" />
+        </g>
+
+        <!-- Note 2 -->
+        <g transform="translate(530, 130) scale(0.85)" fill="#FDE68A">
+          <ellipse cx="12" cy="22" rx="7" ry="5" transform="rotate(-20 12 22)" />
+          <rect x="17" y="5" width="2.8" height="18" />
+          <ellipse cx="36" cy="18" rx="7" ry="5" transform="rotate(-20 36 18)" />
+          <rect x="41" y="1" width="2.8" height="18" />
+          <polygon points="17,5 44,1 44,6 17,10" />
+        </g>
+
+        <!-- Devanagari Sa Re Ga Ma Pa subtle glyph resonance -->
+        <text x="285" y="325" fill="#FFFFFF" fill-opacity="0.75" font-family="'IBM Plex Sans Devanagari', sans-serif" font-size="28" font-weight="600">सा</text>
+        <text x="495" y="325" fill="#FFFFFF" fill-opacity="0.75" font-family="'IBM Plex Sans Devanagari', sans-serif" font-size="28" font-weight="600">प</text>
+      </svg>
+    </div>
+
+    <article class="essay-content space-y-6 sm:space-y-7 text-[1.08rem] sm:text-[1.18rem] md:text-[1.24rem] leading-[2.05] sm:leading-[2.2] tracking-normal font-normal text-stone-800 dark:text-stone-200">
+      
+      <p>
+        ‘ठेहराव’ या शब्दाचा कोशातील अर्थ थांबणे, विराम, अडथळा किंवा स्थिरता असा विविधरंगी आहे. इंग्रजीत याला pause असेही म्हणता येईल. सामान्यतः कोशात दिलेले शब्दार्थ बऱ्याच वेळेस तो शब्द आपल्यासमोर अत्यंत रुक्षपणे सादर करतात. पण जरा ‘पॉज’ घेऊन ‘ठेहरावा’कडे बघितले तर लक्षात येते की हा एक अर्थपूर्ण आणि सुंदर शब्द आहे.
+      </p>
+
+      <p>
+        हिंदुस्थानी शास्त्रीय संगीतामध्ये ‘ठेहराव’ या संकल्पनेला खूप महत्त्व आहे. एखाद्या विदुषी किंवा पंडिताने पेश केलेल्या, खिळवून ठेवणाऱ्या बंदिशीचे वर्णन त्या गाण्याला ‘काय सुंदर ठेहराव आहे’ असेच केले जाते. बैठक स्थिर होऊन ‘चीज’ सादर होत असताना पुरेसा सूर लागला की वाटेत मोक्याच्या जागी ठेहराव असतात ते मैफिलीतील पुढची लयबद्ध तान घेण्यासाठीचा विसावा म्हणून. संगीतातील हे ‘पॉजेस’ गाण्यात क्षणभरासाठी येत असले, तरी पुढे लावायच्या उंच स्वरासाठीचा श्वास घेण्याकरता ते जागोजागी थोडी उसंत निर्माण करतात. गझलेमध्ये, नाट्यसंगीतात, सिनेमातील गाण्यांत आणि काही भावगीतांतही या ठेहरावाच्या जागा स्थिरत्व आणि समतोल आणतात.
+      </p>
+
+      <p>
+        सध्याच्या काळात कॉम्प्युटर्सवर ऑपरेटिंग सिस्टम pre-installed येत असली तरी पूर्वी ‘पीसी’ वेगळा घेऊन त्यावर ‘ओएस’ स्वतंत्रपणे टाकावी लागायची. ‘इनस्टॉलेशन सीडी’ वापरत मशीन बूट करून त्यात प्राथमिक माहिती भरली की विंडोज इनस्टॉल होताना स्क्रीनवर ‘now just sit back and relax while Microsoft Windows is installed on your PC’ असा संदेश झळकत असे. Glitch-free software installation ही देखील एक achievement असण्याच्या त्या जमान्यात हा just sit back and relax नावाचा ठेहराव ‘आल इज वेल’चा सुकून देत असतानाच नवीन संगणक वापरण्याच्या तानेची उत्कंठा वाढवत असे.
+      </p>
+
+      <p>
+        आपण लहान किंवा अगदी ऐन तारुण्यात असतो तेव्हां खेळ, शाळा, कॉलेज, मित्रमैत्रिणी, शिक्षण आणि मग करियर, नवपरिणित्व ते नवागत आणि पुढे या प्रवासात कोणालाच उसंत म्हणून नसते. एकामागे-एक, यानंतर-ते या वेगाने पाठोपाठ काही ना काही चालूच असते. वयच असते ते तसे. त्या कालखंडात आपला acceptance खरेतर जास्त असतो, मुबलक ऊर्जा आणि नाविन्याची ओढही असते पण just sit back and relax for a while हे अनेकांना माहितीच नसते.
+      </p>
+
+      <p>
+        आयुष्याचा हा वेगवान कालखंड प्रगतीची नवनवीन क्षितिजे गाठायला कामी येत असला तरी त्यातील ती ‘त्वरा’च अधून मधून धडपड-पडझड होण्यास कारणीभूत ठरते. भौतिक, ऐहिक सुखांची जाणता-अजाणता ‘लत’ लागण्याची, वाईट-साईट सवयी जडण्याची, तब्येतीवर परिणाम होण्याची आणि अहंगंड वृद्धिंगत होण्याची शक्यता याच कालावधीत जास्त असते, आणि म्हणून इथेच खरेतर ‘ठेहरावां’ची पूर्ण महती ठाऊक झाली नाही तरी निदान तोंडओळख होण्याची गरज असते.
+      </p>
+
+      <p>
+        तर काय असतात हे ठेहराव? ते असते रोजच्या जीवनातील नाविन्यपूर्ण किंवा त्याच-त्या असणाऱ्या, अंगवळणी पडलेल्या रुटीन मधून क्षणभर का असेना पण विसावा घेऊन त्रयस्थ आणि तटस्थपणे श्वासाकडे, स्वतःकडे, आजूबाजूच्या जगाकडे निरपेक्षतेने बघणे. रोजच्या धकाधकीतून मिनिटभर का होईना पण वेळ काढून स्वस्थपणे आत्मपरीक्षण करणे. घरात, समाजात साजरे केले जाणारे सण-समारंभ यांच्या भपक्याआड हरवून गेलेल्या मूळ कारणांचा शोध घेणे आणि यासारखे आणखी काही. ज्याचे त्याचे unique pauses.
+      </p>
+
+      <p>
+        ठेहरावांची ओळख आणि जाणीव कोणाला का आणि कशी होईल हे त्या विधात्यालाच ठाऊक, पण एकदा का अनुभूती आली की एखादा क्षणिक ठेहराव देखील खूप काही शिकवतो, वेगळाच दृष्टिकोन देतो. तो एक ‘पॉज’च असतो जो आयुष्यात ‘ग्रेटफुल’ असण्याचे महत्व खोलवर रुजवतो; हळुवारपणे किंवा प्रसंगी टोचून.
+      </p>
+
+      <p>
+        ही मनोमन रुजलेली कृतज्ञता मग उराशी बाळगलेले ध्येय वाजवी आहे ना? त्या प्रवासात कळत-नकळत आपल्याकडून काही चुका, अन्याय तर होत नाहीये ना? रोजच्या वागण्या-बोलण्यात असभ्यपणा तर डोकावत नाहीये ना? या आणि यासम अनेक गोष्टींची कधी हळुवार तर कधी आतल्या आत पण कठोर जाणीव करून देत राहते. अंगभूत गुणांचा विकास करायला, त्यातील बारकावे आणि खाचाखोचा दाखवून देत त्यात प्राविण्य मिळवायला, छंद शोधायला आणि जोपासायला देखील हे ठेहरावच कामी येत असतात.
+      </p>
+
+      <p>
+        मगाशी म्हणल्याप्रमाणे या ‘ठेहरावां’ची महती जितकी लवकर उमगेल तितके उत्तम. मन लवचिक असताना, acceptance level high असताना just sit back, relax for a while and introspect ची महती कळली तर आपले आपल्याला ओळखणे सोपे जाते. जिथे आपले सूर जुळतात त्या मैफिलीत आपोआप ऊठबस वाढते आणि कुसंगत टळते. Happiness ची अनुभूती जास्त काळ घेता येते.
+      </p>
+
+      <p>
+        असे असले तरी ‘पॉज’ घेण्याचा, मागे वळून पाहण्याचा, काय होऊन गेले ते जाणवण्याचा ठेहराव आयुष्यात जरा मागाहून आला तरी उशीर झाला म्हणून निराश होण्याचे कारण नाही. निसर्गाने दिलेले हार्डवेअर जरी वयाने जुने झाले तरी ऑपरेटिंग सिस्टम अपग्रेड करण्याचे, ती रीबूट व फाईन-ट्यून करून नवीन मैफिलीत हजेरी लावण्याचे, प्रयत्नांची ‘काळी-सात’ आणि सृजनशीलतेचा तानपुरा जुळवून घेण्याचे कसब ज्याच्या त्याच्या मेंदूत pre-installed असते.
+      </p>
+
+      <p>
+        प्रश्न असतो योग्य त्या व्हर्जनच्या विंडोज उघडून त्यातून खुल्या दिलाने आत आणि बाहेर, दोन्हीकडे बघण्याचा. अनुभूती घेऊन पाहण्याचा. कृतज्ञ ‘ठेहरावा’त दडलेला सूर आजमावून बघण्याचा.
+      </p>
+
+      <p class="text-right pt-6 text-stone-500 dark:text-stone-400 font-medium tracking-wider">
+        ~२०२५०८२९
+      </p>
+    </article>
+  </main>
+
+  <script>
+    (function () {
+      // Theme switching logic
+      const htmlEl = document.documentElement;
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      
+      const storedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+        htmlEl.classList.add('dark');
+      } else {
+        htmlEl.classList.remove('dark');
+      }
+
+      themeToggleBtn.addEventListener('click', function () {
+        const isDark = htmlEl.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+
+      // Share logic
+      const shareBtn = document.getElementById('shareBtn');
+      const toast = document.getElementById('toast');
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.remove('opacity-0');
+        toast.classList.add('opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('opacity-100');
+          toast.classList.add('opacity-0');
+        }, 2200);
+      }
+
+      shareBtn.addEventListener('click', async function () {
+        const shareData = {
+          title: 'ठेहराव',
+          text: 'ठेहराव - एक अर्थपूर्ण आणि सुंदर विचार',
+          url: window.location.href,
+        };
+
+        if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+          try {
+            await navigator.share(shareData);
+          } catch (err) {
+            // User cancelled share or dismissed dialog
+            if (err.name !== 'AbortError') {
+              copyToClipboard();
+            }
+          }
+        } else {
+          copyToClipboard();
+        }
+      });
+
+      function copyToClipboard() {
+        const currentUrl = window.location.href;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(currentUrl)
+            .then(() => showToast('Link copied to clipboard!'))
+            .catch(() => fallbackCopy(currentUrl));
+        } else {
+          fallbackCopy(currentUrl);
+        }
+      }
+
+      function fallbackCopy(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.top = '-9999px';
+        textArea.style.left = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          showToast('Link copied to clipboard!');
+        } catch (err) {
+          showToast('Unable to copy link');
+        }
+        document.body.removeChild(textArea);
+      }
+    })();
+  </script>
+</body>
+</html>
